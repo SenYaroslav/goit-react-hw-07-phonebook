@@ -1,0 +1,20 @@
+.filter__container {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.filter__label {
+  margin-bottom: 10px;
+}
+
+.filter__input {
+  box-sizing: border-box;
+  min-width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  background-color: rgb(200, 200, 200);
+  margin-top: 5px;
+  padding-left: 10px;
+  height: 35px;
+  font-size: 18px;
+}
