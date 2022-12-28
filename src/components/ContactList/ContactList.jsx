@@ -1,31 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ContactItem from '../ContactItem/ContactItem';
 import css from './ContactList.module.css';
-import { useSelector } from 'react-redux';
-import { contacts } from 'redux/contactsSlice';
-import { filter } from 'redux/filterSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { contacts } from 'redux/selectors';
+import { filter } from 'redux/selectors';
+import { fetchAll } from 'redux/operations';
 
 const ContactList = () => {
-  const contactsSelector = useSelector(contacts);
-  const contactsArr = contactsSelector.contacts
+  const dispatch = useDispatch();
   const filtered = useSelector(filter);
+  const { items, isLoading, error } = useSelector(contacts);
 
-  const getVisibleContacts = contactsArr.filter(contact => contact.name.toLowerCase().includes(filtered),
+  useEffect(() => {
+    dispatch(fetchAll());
+  }, [dispatch]);
+
+  const getVisibleContacts = items.filter(contact =>
+    contact.name.toLowerCase().includes(filtered)
   );
 
   return (
-    getVisibleContacts && (
-      <ul className={css.contacts__list}>
-        {getVisibleContacts.map(({id, name, number}) => (
-          <ContactItem
-            key={id}
-            id={id}
-            name={name}
-            number={number}
-          />
-        ))}
-      </ul>
-    )
+    <>
+      <div>
+        {isLoading && <p>Loading contscts...</p>}
+        {error && <p>{error}</p>}
+      </div>
+      {getVisibleContacts && (
+        <ul className={css.contacts__list}>
+          {getVisibleContacts.map(({ id, name, number }) => (
+            <ContactItem key={id} id={id} name={name} number={number} />
+          ))}
+        </ul>
+      )}
+    </>
   );
 };
 

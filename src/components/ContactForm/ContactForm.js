@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
-import { contacts } from 'redux/contactsSlice';
+import { addContact } from 'redux/operations';
+import { contacts } from 'redux/selectors';
+import { BsPersonPlusFill } from 'react-icons/bs';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const dispatch = useDispatch();
-  const contactsSelector = useSelector(contacts);
-  const contactsArr = contactsSelector.contacts;
+  const { items } = useSelector(contacts);
 
   const handleChange = e => {
     if (e.currentTarget.name === 'name') {
@@ -24,12 +24,12 @@ const ContactForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    const nameList = contactsArr.map(contact => contact.name);
+    const nameList = items.map(contact => contact.name);
 
     if (nameList.includes(name)) {
       alert(`${name} is already in contacts`);
     } else {
-      dispatch(addContact(name, number));
+      dispatch(addContact({ name, number }));
       reset();
     }
   };
@@ -68,6 +68,10 @@ const ContactForm = () => {
         />
       </label>
       <button className={css.phoneBook__btn} type="submit">
+        <BsPersonPlusFill
+          size={'1.5em'}
+          style={{ verticalAlign: 'bottom', marginRight: '10px' }}
+        />
         Add contact
       </button>
     </form>

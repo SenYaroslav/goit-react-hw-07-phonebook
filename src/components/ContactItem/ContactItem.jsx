@@ -2,21 +2,27 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import css from './ContactItem.module.css';
 import { useDispatch } from 'react-redux';
-import { delContact } from 'redux/contactsSlice';
+import { deleteContact } from 'redux/operations';
+import { BsFileEarmarkPerson } from 'react-icons/bs';
 
 const ContactItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
 
   return (
     <li className={css.contact__item} id={id}>
-      <p className={css.contact__name}>{name}:</p>
+      <p className={css.contact__name}>
+        <BsFileEarmarkPerson
+          style={{ verticalAlign: 'bottom', marginRight: '10px' }}
+        />
+        {name}
+      </p>
       <span className={css.contact__number}>
         {number}
         <button
           className={css.contact__btn}
           type="button"
-          onClick={() => dispatch(delContact(id))}
-        >
+          onClick={() => dispatch(deleteContact(parseInt(id)))}
+          >
           Delete
         </button>
       </span>

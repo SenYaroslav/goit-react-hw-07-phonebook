@@ -14,7 +14,7 @@ const Filter = ({ title }) => {
     dispatch(setFilter(normalized));
   };
 
-  return (
+  return ( 
     <div className={css.filter__container}>
       <label className={css.filter__label}>
         {title}

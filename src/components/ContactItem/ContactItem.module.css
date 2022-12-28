@@ -1,5 +1,5 @@
 .contact__item {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgb(70, 70, 70);
   width: 300px;
 }
 
@@ -17,9 +17,9 @@
 
 .contact__btn {
   margin-left: 10px;
-  min-width: 95px;
+  min-width: 80px;
   padding: 10px;
-  border: 1px solid transparent;
+  border: 1px outset rgb(70, 70, 70);
   border-radius: 5px;
 
   text-transform: uppercase;

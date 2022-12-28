@@ -20,12 +20,15 @@
 }
 
 .phoneBook__btn {
+  margin-top: 10px;
   min-width: 95px;
-  padding: 10px;
-  border: 1px solid transparent;
+  height: 40px;
+  padding-bottom: 5px;
+  border: 1px ridge rgb(70, 70, 70);
   border-radius: 5px;
 
   text-transform: uppercase;
+  vertical-align: text-top;
   font-size: 14px;
   background-color: rgb(24, 24, 24);
   color: #fff;
